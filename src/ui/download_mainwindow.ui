@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>952</width>
-    <height>761</height>
+    <height>800</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -84,8 +84,8 @@
    <widget class="QPushButton" name="video_download_button">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>380</y>
+      <x>70</x>
+      <y>420</y>
       <width>231</width>
       <height>23</height>
      </rect>
@@ -97,8 +97,8 @@
    <widget class="QPlainTextEdit" name="cmd_output_plaintextedit">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>420</y>
+      <x>70</x>
+      <y>460</y>
       <width>831</width>
       <height>261</height>
      </rect>
@@ -107,8 +107,8 @@
    <widget class="QLineEdit" name="video_url_lineedit">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>310</y>
+      <x>130</x>
+      <y>350</y>
       <width>771</width>
       <height>21</height>
      </rect>
@@ -117,8 +117,8 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>310</y>
+      <x>70</x>
+      <y>350</y>
       <width>61</width>
       <height>21</height>
      </rect>
@@ -163,8 +163,8 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>340</y>
+      <x>70</x>
+      <y>380</y>
       <width>81</width>
       <height>21</height>
      </rect>
@@ -176,8 +176,8 @@
    <widget class="QLineEdit" name="video_format_lineedit">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>340</y>
+      <x>140</x>
+      <y>380</y>
       <width>311</width>
       <height>21</height>
      </rect>
@@ -189,14 +189,24 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>340</y>
+      <x>460</x>
+      <y>380</y>
       <width>251</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
      <string>（一般情况下，使用默认值即可）</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="get_cookie_result_plaintextedit">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>220</y>
+      <width>821</width>
+      <height>64</height>
+     </rect>
     </property>
    </widget>
   </widget>
