@@ -4,6 +4,7 @@ from settings import COOKIES_DIR, VIDEOS_DIR
 from src.ui.download_mainwindow import Ui_MainWindow
 from src.utils.cookie import CookieWorker
 from src.utils.download import DownloadWorker
+from src.utils.format import FetchFormatWorker
 
 
 class Downloader(QMainWindow, Ui_MainWindow):
@@ -23,6 +24,7 @@ class Downloader(QMainWindow, Ui_MainWindow):
     def connect_signals(self):
         self.get_cookies_button.clicked.connect(self.get_cookies)
         self.video_download_button.clicked.connect(self.download_video)
+        self.video_format_fetch_button.clicked.connect(self.fetch_video_format)
         self.clear_cmd_output_button.clicked.connect(self.clear_cmd_output)
 
     # cookie get functions
@@ -66,14 +68,28 @@ class Downloader(QMainWindow, Ui_MainWindow):
             fmt=fmt,
             output=output,
         )
-        self.download_worker.result_ready.connect(self.on_download_output_message)
+        self.download_worker.result_ready.connect(self.on_cmd_output_message)
         self.download_worker.start()
-
-    def on_download_output_message(self, message: str):
-        self.cmd_output_plaintextedit.appendPlainText(message)
 
     def clear_cmd_output(self):
         self.cmd_output_plaintextedit.clear()
 
     # video format fetch functions
-    
+    def fetch_video_format(self):
+        url = self.video_url_lineedit.text()
+        fmt = self.video_format_lineedit.text()
+
+        if 'bilibili.com' in url:
+            cookie = COOKIES_DIR / 'bilibili.com_cookies.txt'
+        elif 'youtube.com' in url:
+            cookie = COOKIES_DIR / 'youtube.com_cookies.txt'
+        else:
+            self.cmd_output_plaintextedit.appendPlainText('当前网址不支持！')
+            return
+
+        self.video_fetch_format_worker = FetchFormatWorker(url, cookie)
+        self.video_fetch_format_worker.result_ready.connect(self.on_cmd_output_message)
+        self.video_fetch_format_worker.start()
+
+    def on_cmd_output_message(self, message: str):
+        self.cmd_output_plaintextedit.appendPlainText(message)

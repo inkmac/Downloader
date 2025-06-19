@@ -33,7 +33,7 @@ class DownloadWorker(QThread):
             cookie: str,
             fmt: str,
             output: str
-    ) -> tuple[float, float]:
+    ):
 
         command = [
             DOWNLOADER_PATH,
@@ -57,7 +57,7 @@ class DownloadWorker(QThread):
             if output:
                 if '[download]' in output and 'has already been downloaded' in output:
                     self.result_ready.emit(output.strip())
-                    return -1, -1
+                    return
 
                 # will reach if no exception or already downloaded
                 if '[Merger] Merging formats into' in output:
@@ -69,9 +69,8 @@ class DownloadWorker(QThread):
 
         return_code = process.poll()
         if return_code != 0:
-            raise Exception(f"命令执行失败，错误: {process.stderr.read()}")
+            self.result_ready.emit(f"命令执行失败，错误: {process.stderr.read()}")
+            return
 
         merge_time = time.time() - merge_start_time
         self.result_ready.emit(f'视频合并耗时 {merge_time:.2f} 秒')
-
-        return download_time, merge_time

@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00e9b275-2dd4-481f-ae79-9220b3a50af5" name="Changes" comment="feat(downloader): add yt-dlp path">
+    <list default="true" id="00e9b275-2dd4-481f-ae79-9220b3a50af5" name="Changes" comment="feat: add cmd output clear button">
+      <change afterPath="$PROJECT_DIR$/src/utils/format.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/downloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/downloader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/download_mainwindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/download_mainwindow.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/download_mainwindow.ui" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/download_mainwindow.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/download.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/download.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,6 +147,8 @@
       <workItem from="1750300626778" duration="160000" />
       <workItem from="1750304645415" duration="174000" />
       <workItem from="1750305536029" duration="55000" />
+      <workItem from="1750305676973" duration="172000" />
+      <workItem from="1750305867193" duration="708000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -186,7 +190,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750295661253</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="feat: add cmd output clear button">
+      <option name="closed" value="true" />
+      <created>1750305722645</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1750305722646</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,10 +210,11 @@
     <MESSAGE value="feat(CookieWorker): use CookieWorker to get cookies" />
     <MESSAGE value="feat(DownloadWorker): use DownloadWorker to download videos" />
     <MESSAGE value="feat(downloader): add yt-dlp path" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(downloader): add yt-dlp path" />
+    <MESSAGE value="feat: add cmd output clear button" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add cmd output clear button" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/downloader$downloader.coverage" NAME="downloader Coverage Results" MODIFIED="1750256465745" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/downloader$main.coverage" NAME="main Coverage Results" MODIFIED="1750305559925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/downloader$main.coverage" NAME="main Coverage Results" MODIFIED="1750306579691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

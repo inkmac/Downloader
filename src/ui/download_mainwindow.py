@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1063, 859)
+        MainWindow.resize(968, 799)
         MainWindow.setStyleSheet(u"font: 11pt \"Microsoft YaHei UI\";")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -77,6 +77,9 @@ class Ui_MainWindow(object):
         self.clear_cmd_output_button = QPushButton(self.centralwidget)
         self.clear_cmd_output_button.setObjectName(u"clear_cmd_output_button")
         self.clear_cmd_output_button.setGeometry(QRect(70, 730, 111, 23))
+        self.video_format_fetch_button = QPushButton(self.centralwidget)
+        self.video_format_fetch_button.setObjectName(u"video_format_fetch_button")
+        self.video_format_fetch_button.setGeometry(QRect(320, 430, 211, 23))
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -106,5 +109,6 @@ class Ui_MainWindow(object):
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"\uff08\u4e00\u822c\u60c5\u51b5\u4e0b\uff0c\u4f7f\u7528\u9ed8\u8ba4\u503c\u5373\u53ef\uff09", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u89c6\u9891url\uff1a", None))
         self.clear_cmd_output_button.setText(QCoreApplication.translate("MainWindow", u"\u6e05\u7a7a\u5f53\u524d\u8f93\u51fa", None))
+        self.video_format_fetch_button.setText(QCoreApplication.translate("MainWindow", u"\u70b9\u51fb\u83b7\u53d6\u89c6\u9891\u53ef\u7528\u683c\u5f0f", None))
     # retranslateUi
 
