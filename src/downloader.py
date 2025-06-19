@@ -25,7 +25,6 @@ class Downloader(QMainWindow, Ui_MainWindow):
         self.get_cookies_button.clicked.connect(self.get_cookies)
         self.video_download_button.clicked.connect(self.download_video)
         self.video_format_fetch_button.clicked.connect(self.fetch_video_format)
-        self.clear_cmd_output_button.clicked.connect(self.clear_cmd_output)
 
     # cookie get functions
     def get_cookies(self):
@@ -41,6 +40,8 @@ class Downloader(QMainWindow, Ui_MainWindow):
 
     # video download functions
     def download_video(self):
+        self.clear_cmd_output()
+
         # get params
         url = self.video_url_lineedit.text()
         fmt = self.video_format_lineedit.text()
@@ -71,13 +72,11 @@ class Downloader(QMainWindow, Ui_MainWindow):
         self.download_worker.result_ready.connect(self.on_cmd_output_message)
         self.download_worker.start()
 
-    def clear_cmd_output(self):
-        self.cmd_output_plaintextedit.clear()
-
     # video format fetch functions
     def fetch_video_format(self):
+        self.clear_cmd_output()
+
         url = self.video_url_lineedit.text()
-        fmt = self.video_format_lineedit.text()
 
         if 'bilibili.com' in url:
             cookie = COOKIES_DIR / 'bilibili.com_cookies.txt'
@@ -93,3 +92,7 @@ class Downloader(QMainWindow, Ui_MainWindow):
 
     def on_cmd_output_message(self, message: str):
         self.cmd_output_plaintextedit.appendPlainText(message)
+
+    # util functions
+    def clear_cmd_output(self):
+        self.cmd_output_plaintextedit.clear()
