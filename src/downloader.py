@@ -23,8 +23,9 @@ class Downloader(QMainWindow, Ui_MainWindow):
     def connect_signals(self):
         self.get_cookies_button.clicked.connect(self.get_cookies)
         self.video_download_button.clicked.connect(self.download_video)
+        self.clear_cmd_output_button.clicked.connect(self.clear_cmd_output)
 
-    # callback functions
+    # cookie get functions
     def get_cookies(self):
         browser = self.browser_combobox.currentText()
         website = self.website_combobox.currentText()
@@ -36,7 +37,7 @@ class Downloader(QMainWindow, Ui_MainWindow):
     def on_cookie_get_done(self, result: str):
         self.get_cookie_result_plaintextedit.setPlainText(result)
 
-
+    # video download functions
     def download_video(self):
         # get params
         url = self.video_url_lineedit.text()
@@ -68,7 +69,11 @@ class Downloader(QMainWindow, Ui_MainWindow):
         self.download_worker.result_ready.connect(self.on_download_output_message)
         self.download_worker.start()
 
-
     def on_download_output_message(self, message: str):
         self.cmd_output_plaintextedit.appendPlainText(message)
 
+    def clear_cmd_output(self):
+        self.cmd_output_plaintextedit.clear()
+
+    # video format fetch functions
+    
