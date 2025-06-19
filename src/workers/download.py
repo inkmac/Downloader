@@ -48,8 +48,6 @@ class DownloadWorker(QThread):
         download_start_time: float = time.time()
         merge_start_time: float = -1
 
-        download_time: float = 0
-
         while True:
             output = process.stdout.readline()
             if output == '' and process.poll() is not None:

@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00e9b275-2dd4-481f-ae79-9220b3a50af5" name="Changes" comment="feat: add cmd output clear button">
-      <change afterPath="$PROJECT_DIR$/src/utils/format.py" afterDir="false" />
+    <list default="true" id="00e9b275-2dd4-481f-ae79-9220b3a50af5" name="Changes" comment="feat(format): add FetchFormatWorker to fetch video available formats">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/downloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/downloader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/download_mainwindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/download_mainwindow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/download_mainwindow.ui" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/download_mainwindow.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/download.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/download.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,10 +37,13 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Python.dlp.executor&quot;: &quot;Run&quot;,
     &quot;Python.downloader.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/Projects/downloader&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -64,8 +64,8 @@
       <recent name="D:\Projects\downloader\src\ui" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
-    <configuration name="downloader" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.dlp">
+    <configuration name="dlp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="downloader" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -74,12 +74,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/downloader.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/dlp.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -111,10 +111,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="downloader" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.dlp" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.downloader" />
       </list>
     </recent_temporary>
   </component>
@@ -148,7 +172,10 @@
       <workItem from="1750304645415" duration="174000" />
       <workItem from="1750305536029" duration="55000" />
       <workItem from="1750305676973" duration="172000" />
-      <workItem from="1750305867193" duration="708000" />
+      <workItem from="1750305867193" duration="841000" />
+      <workItem from="1750311003071" duration="726000" />
+      <workItem from="1750311973995" duration="40000" />
+      <workItem from="1750312022428" duration="2501000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -198,7 +225,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750305722646</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat(format): add FetchFormatWorker to fetch video available formats">
+      <option name="closed" value="true" />
+      <created>1750306669470</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1750306669470</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,10 +246,13 @@
     <MESSAGE value="feat(DownloadWorker): use DownloadWorker to download videos" />
     <MESSAGE value="feat(downloader): add yt-dlp path" />
     <MESSAGE value="feat: add cmd output clear button" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add cmd output clear button" />
+    <MESSAGE value="feat(format): add FetchFormatWorker to fetch video available formats" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(format): add FetchFormatWorker to fetch video available formats" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/downloader$dlp.coverage" NAME="dlp Coverage Results" MODIFIED="1750314344718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/downloader$downloader.coverage" NAME="downloader Coverage Results" MODIFIED="1750256465745" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/downloader$main.coverage" NAME="main Coverage Results" MODIFIED="1750306579691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/downloader$test.coverage" NAME="test Coverage Results" MODIFIED="1750312564995" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/downloader$main.coverage" NAME="main Coverage Results" MODIFIED="1750312173251" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

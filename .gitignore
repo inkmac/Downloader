@@ -2,7 +2,7 @@ build/
 dist/
 *.spec
 
-Test/
+test/
 __pycache__/
 venv/
 .venv/

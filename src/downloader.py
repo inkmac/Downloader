@@ -2,9 +2,9 @@ from PySide6.QtWidgets import QMainWindow
 
 from settings import COOKIES_DIR, VIDEOS_DIR
 from src.ui.download_mainwindow import Ui_MainWindow
-from src.utils.cookie import CookieWorker
-from src.utils.download import DownloadWorker
-from src.utils.format import FetchFormatWorker
+from src.workers.cookie import CookieWorker
+from src.workers.download import DownloadWorker
+from src.workers.format import FetchFormatWorker
 
 
 class Downloader(QMainWindow, Ui_MainWindow):
