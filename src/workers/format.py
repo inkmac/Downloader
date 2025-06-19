@@ -8,7 +8,7 @@ from src.utils.logger import YtLogger
 
 
 class FetchFormatWorker(QThread):
-    result_ready = Signal(str)
+    console_output = Signal(str)
 
     def __init__(
             self,
@@ -23,7 +23,7 @@ class FetchFormatWorker(QThread):
     def run(self):
         ydl_opts = {
             'cookiefile': self.cookie,
-            'logger': YtLogger(self.result_ready),
+            'logger': YtLogger(self.console_output),
         }
 
         try:
@@ -31,7 +31,7 @@ class FetchFormatWorker(QThread):
                 info = ydl.extract_info(self.url, download=False)
                 formats = info.get('formats', [])
                 if not formats:
-                    self.result_ready.emit("未能获取到可用格式信息。")
+                    self.console_output.emit("未能获取到可用格式信息。")
                     return
 
                 headers = ["ID", "EXT", "RESOLUTION", "FILESIZE"]
@@ -48,8 +48,8 @@ class FetchFormatWorker(QThread):
                     rows.append([fmt_id, ext, res, filesize_str])
 
                 table_str = tabulate(rows, headers=headers, tablefmt="plain")
-                self.result_ready.emit(table_str)
+                self.console_output.emit(table_str)
 
         except Exception as e:
-            self.result_ready.emit(f"[Exception] 获取格式失败: {str(e)}")
+            self.console_output.emit(f"[Exception] 获取格式失败: {str(e)}")
             traceback.print_exc()

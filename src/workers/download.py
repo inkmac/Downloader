@@ -5,7 +5,7 @@ from src.utils.logger import YtLogger
 
 
 class DownloadWorker(QThread):
-    result_ready = Signal(str)
+    console_output = Signal(str)
 
     def __init__(
             self,
@@ -26,14 +26,14 @@ class DownloadWorker(QThread):
             'format': self.fmt,
             'cookiefile': str(self.cookie),
             'outtmpl': str(self.output),
-            'logger': YtLogger(self.result_ready),
+            'logger': YtLogger(self.console_output),
         }
 
         try:
             with YoutubeDL(ydl_opts) as ydl:
                 ydl.download([self.url])
         except Exception as e:
-            self.result_ready.emit(f'[Exception] {str(e)}')
+            self.console_output.emit(f'[Exception] {str(e)}')
             return
 
 

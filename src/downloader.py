@@ -69,7 +69,7 @@ class Downloader(QMainWindow, Ui_MainWindow):
             fmt=fmt,
             output=output,
         )
-        self.download_worker.result_ready.connect(self.on_cmd_output_message)
+        self.download_worker.console_output.connect(self.append_console_output)
         self.download_worker.start()
 
     # video format fetch functions
@@ -87,10 +87,10 @@ class Downloader(QMainWindow, Ui_MainWindow):
             return
 
         self.video_fetch_format_worker = FetchFormatWorker(url, cookie)
-        self.video_fetch_format_worker.result_ready.connect(self.on_cmd_output_message)
+        self.video_fetch_format_worker.console_output.connect(self.append_console_output)
         self.video_fetch_format_worker.start()
 
-    def on_cmd_output_message(self, message: str):
+    def append_console_output(self, message: str):
         self.cmd_output_plaintextedit.appendPlainText(message)
 
     # util functions
