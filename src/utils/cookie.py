@@ -1,4 +1,3 @@
-import os
 from http.cookiejar import MozillaCookieJar
 
 import browser_cookie3
@@ -40,6 +39,6 @@ class CookieWorker(QThread):
 
             mcj.save(ignore_discard=True, ignore_expires=True)
 
-            self.result_ready.emit(f'cookie已保存到: {cookie_path}')
+            self.result_ready.emit(f'cookie已保存到: {cookie_path}，请不要移动或者修改')
         except Exception as e:
             self.result_ready.emit(f'获取Cookie失败，{e}')

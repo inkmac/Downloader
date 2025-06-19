@@ -1,7 +1,9 @@
 from PySide6.QtWidgets import QMainWindow
 
+from settings import COOKIES_DIR, VIDEOS_DIR
 from src.ui.download_mainwindow import Ui_MainWindow
 from src.utils.cookie import CookieWorker
+from src.utils.download import DownloadWorker
 
 
 class Downloader(QMainWindow, Ui_MainWindow):
@@ -36,4 +38,31 @@ class Downloader(QMainWindow, Ui_MainWindow):
 
 
     def download_video(self):
-        print("download_video")
+        # get params
+        url = self.video_url_lineedit.text()
+        fmt = self.video_format_lineedit.text()
+
+        if 'bilibili.com' in url:
+            cookie = COOKIES_DIR / 'bilibili.com_cookies.txt'
+            output = VIDEOS_DIR / 'bilibili' / '%(title)s.%(ext)s'
+        elif 'youtube.com' in url:
+            cookie = COOKIES_DIR / 'youtube.com_cookies.txt'
+            output = VIDEOS_DIR / 'youtube' / '%(title)s.%(ext)s'
+        else:
+            self.cmd_output_plaintextedit.appendPlainText('当前网址不支持！')
+            return
+
+        # start worker
+        self.download_worker = DownloadWorker(
+            url=url,
+            cookie=cookie,
+            fmt=fmt,
+            output=output,
+        )
+        self.download_worker.result_ready.connect(self.on_download_output_message)
+        self.download_worker.start()
+
+
+    def on_download_output_message(self, message: str):
+        self.cmd_output_plaintextedit.appendPlainText(message)
+
