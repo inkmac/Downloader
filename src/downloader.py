@@ -52,6 +52,12 @@ class Downloader(QMainWindow, Ui_MainWindow):
             self.cmd_output_plaintextedit.appendPlainText('当前网址不支持！')
             return
 
+        if not cookie.exists():
+            self.cmd_output_plaintextedit.appendPlainText('该网址cookie不存在！请先获取cookies！')
+            return
+
+        output.parent.mkdir(parents=True, exist_ok=True)
+
         # start worker
         self.download_worker = DownloadWorker(
             url=url,

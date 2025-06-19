@@ -8,3 +8,4 @@ else:
 
 COOKIES_DIR = BASE_DIR / 'cookies'
 VIDEOS_DIR = BASE_DIR / 'videos'
+DOWNLOADER_PATH = BASE_DIR / 'yt-dlp.exe'

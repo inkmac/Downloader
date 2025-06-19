@@ -3,6 +3,8 @@ import time
 
 from PySide6.QtCore import QThread, Signal
 
+from settings import DOWNLOADER_PATH
+
 
 class DownloadWorker(QThread):
     result_ready = Signal(str)
@@ -34,7 +36,7 @@ class DownloadWorker(QThread):
     ) -> tuple[float, float]:
 
         command = [
-            "yt-dlp.exe",
+            DOWNLOADER_PATH,
             "--cookies", cookie,
             "-f", fmt,
             "-o", output,
