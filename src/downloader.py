@@ -44,7 +44,7 @@ class Downloader(QMainWindow, Ui_MainWindow):
 
         # get params
         url = self.video_url_lineedit.text()
-        fmt = self.video_format_lineedit.text()
+        fmt = f'{self.video_format_id_combobox.currentText()}+{self.audio_format_id_combobox.currentText()}'
 
         if 'bilibili.com' in url:
             cookie = COOKIES_DIR / 'bilibili.com_cookies.txt'
@@ -88,7 +88,18 @@ class Downloader(QMainWindow, Ui_MainWindow):
 
         self.video_fetch_format_worker = FetchFormatWorker(url, cookie)
         self.video_fetch_format_worker.console_output.connect(self.append_console_output)
+        self.video_fetch_format_worker.video_formats_ready.connect(self.video_fetch_format_ready)
+        self.video_fetch_format_worker.audio_formats_ready.connect(self.audio_fetch_format_ready)
         self.video_fetch_format_worker.start()
+
+    def video_fetch_format_ready(self, video_format_ids: list[str]):
+        for video_format_id in video_format_ids:
+            self.video_format_id_combobox.addItem(video_format_id)
+
+    def audio_fetch_format_ready(self, audio_format_ids: list[str]):
+        for audio_format_id in audio_format_ids:
+            self.audio_format_id_combobox.addItem(audio_format_id)
+
 
     def append_console_output(self, message: str):
         self.cmd_output_plaintextedit.appendPlainText(message)
