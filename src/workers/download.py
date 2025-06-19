@@ -1,3 +1,5 @@
+import traceback
+
 from PySide6.QtCore import QThread, Signal
 from yt_dlp import YoutubeDL
 
@@ -22,6 +24,13 @@ class DownloadWorker(QThread):
 
 
     def run(self):
+        try:
+            self.download()
+        except Exception as e:
+            self.console_output.emit(f'[Exception] {str(e)}')
+            traceback.print_exc()
+
+    def download(self):
         ydl_opts = {
             'format': self.fmt,
             'cookiefile': str(self.cookie),
@@ -29,11 +38,6 @@ class DownloadWorker(QThread):
             'logger': YtLogger(self.console_output),
         }
 
-        try:
-            with YoutubeDL(ydl_opts) as ydl:
-                ydl.download([self.url])
-        except Exception as e:
-            self.console_output.emit(f'[Exception] {str(e)}')
-            return
-
-
+        with YoutubeDL(ydl_opts) as ydl:
+            ydl.download([self.url])
+        self.console_output.emit("[Success] Download Complete")

@@ -23,13 +23,13 @@ class FetchFormatWorker(QThread):
 
     def run(self):
         try:
-            self.download()
+            self.fetch_format()
         except Exception as e:
             self.console_output.emit(f"[Exception] 获取格式失败: {str(e)}")
             traceback.print_exc()
 
 
-    def download(self):
+    def fetch_format(self):
         ydl_opts = {
             'cookiefile': self.cookie,
             'logger': YtLogger(self.console_output),
