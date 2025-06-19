@@ -132,19 +132,19 @@ class Downloader(QMainWindow, Ui_MainWindow):
         self.video_fetch_format_worker.audio_formats_ready.connect(self.audio_fetch_format_ready)
         self.video_fetch_format_worker.start()
 
-    def video_fetch_format_ready(self, video_format_ids: list[str]):
+    def video_fetch_format_ready(self, video_format_ids: list[tuple[str, str]]):
         self.video_format_id_combobox.clear()
         self.init_video_combobox()
 
-        for video_format_id in video_format_ids:
-            self.video_format_id_combobox.addItem(video_format_id, video_format_id)
+        for display_text, video_format_id in video_format_ids:
+            self.video_format_id_combobox.addItem(display_text, userData=video_format_id)
 
-    def audio_fetch_format_ready(self, audio_format_ids: list[str]):
+    def audio_fetch_format_ready(self, audio_format_ids: list[tuple[str, str]]):
         self.audio_format_id_combobox.clear()
         self.init_audio_combobox()
 
-        for audio_format_id in audio_format_ids:
-            self.audio_format_id_combobox.addItem(audio_format_id, audio_format_id)
+        for display_text, audio_format_id in audio_format_ids:
+            self.audio_format_id_combobox.addItem(display_text, userData=audio_format_id)
 
 
     def append_console_output(self, message: str):

@@ -1,9 +1,8 @@
 import traceback
 
 from PySide6.QtCore import QThread, Signal
-from tabulate import tabulate
-from yt_dlp import YoutubeDL
 
+from src.utils.custom_yt import SignalYoutubeDL
 from src.utils.logger import YtLogger
 
 
@@ -36,45 +35,40 @@ class FetchFormatWorker(QThread):
             'logger': YtLogger(self.console_output),
         }
 
-        with YoutubeDL(ydl_opts) as ydl:
+        with SignalYoutubeDL(ydl_opts, console_signal=self.console_output) as ydl:
             info = ydl.extract_info(self.url, download=False)
+            ydl.list_formats(info)
+
 
         formats = info.get('formats', [])
         if not formats:
             self.console_output.emit("未能获取到可用格式信息。")
             return
 
-        headers: list[str] = ["ID", "EXT", "RESOLUTION", "FILESIZE"]
-        rows: list[list[str]] = []
-
-        video_format_ids: list[str] = []
-        audio_format_ids: list[str] = []
+        video_format_ids: list[tuple[str, str]] = []
+        audio_format_ids: list[tuple[str, str]] = []
 
         for f in formats:
             if f.get('ext') == 'mhtml':
                 continue
 
-            fmt_id = f.get('format_id')
-            ext = f.get('ext') or 'N/A'
-            res = f.get('resolution') or f"{f.get('width', '?')}x{f.get('height', '?')}" or 'audio only'
+            fmt_id = f['format_id']
+            ext = f['ext']
 
-            filesize = f.get('filesize')
-            filesize_str = f"{filesize / (1024 * 1024):.2f}MiB" if filesize else 'N/A'
+            height = f.get('height')
+            if height:
+                resolution = f"{height}p"
+            else:
+                resolution = f.get('resolution') or 'audio only'
 
-            rows.append([fmt_id, ext, res, filesize_str])
+            abr = f.get('abr')
 
             if f.get('vcodec', 'none') != 'none':
-                video_format_ids.append(fmt_id)
+                video_format_ids.append((f'{fmt_id}（{resolution} {ext}格式）', fmt_id))
             elif f.get('acodec', 'none') != 'none':
-                audio_format_ids.append(fmt_id)
-
-        table_str = tabulate(rows, headers=headers, tablefmt="plain")
-        divider = '-' * len(table_str.splitlines()[0])
+                audio_format_ids.append((f'{fmt_id}（{round(abr)}kbps {ext}格式）', fmt_id))
 
         # send format table
-        self.console_output.emit(divider)
-        self.console_output.emit(table_str)
-        self.console_output.emit(divider)
         self.console_output.emit("可用格式已更新，可以在『视频格式』下拉框中选择想要下载的格式 ID")
 
         # send format id signal
