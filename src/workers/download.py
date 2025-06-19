@@ -1,9 +1,7 @@
-import subprocess
-import time
-
 from PySide6.QtCore import QThread, Signal
+from yt_dlp import YoutubeDL
 
-from settings import DOWNLOADER_PATH
+from src.utils.logger import YtLogger
 
 
 class DownloadWorker(QThread):
@@ -24,51 +22,18 @@ class DownloadWorker(QThread):
 
 
     def run(self):
-        self.download_video(self.url, self.cookie, self.fmt, self.output)
+        ydl_opts = {
+            'format': self.fmt,
+            'cookiefile': str(self.cookie),
+            'outtmpl': str(self.output),
+            'logger': YtLogger(self.result_ready),
+        }
 
-
-    def download_video(
-            self,
-            url: str,
-            cookie: str,
-            fmt: str,
-            output: str
-    ):
-
-        command = [
-            DOWNLOADER_PATH,
-            "--cookies", cookie,
-            "-f", fmt,
-            "-o", output,
-            url
-        ]
-
-        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-
-        download_start_time: float = time.time()
-        merge_start_time: float = -1
-
-        while True:
-            output = process.stdout.readline()
-            if output == '' and process.poll() is not None:
-                break
-            if output:
-                if '[download]' in output and 'has already been downloaded' in output:
-                    self.result_ready.emit(output.strip())
-                    return
-
-                # will reach if no exception or already downloaded
-                if '[Merger] Merging formats into' in output:
-                    download_time = time.time() - download_start_time
-                    self.result_ready.emit(f'视频下载耗时 {download_time:.2f} 秒')
-                    merge_start_time = time.time()
-
-                self.result_ready.emit(output.strip())
-
-        return_code = process.poll()
-        if return_code != 0:
-            self.result_ready.emit(f"命令执行失败，错误: {process.stderr.read()}")
+        try:
+            with YoutubeDL(ydl_opts) as ydl:
+                ydl.download([self.url])
+        except Exception as e:
+            self.result_ready.emit(f'[Exception] {str(e)}')
             return
 
-        merge_time = time.time() - merge_start_time
-        self.result_ready.emit(f'视频合并耗时 {merge_time:.2f} 秒')
+

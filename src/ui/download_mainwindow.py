@@ -24,7 +24,8 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(968, 799)
-        MainWindow.setStyleSheet(u"font: 11pt \"Microsoft YaHei UI\";")
+        MainWindow.setStyleSheet(u"font: 11pt \"JetBrains Mono\";\n"
+"")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.label = QLabel(self.centralwidget)
