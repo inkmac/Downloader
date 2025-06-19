@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00e9b275-2dd4-481f-ae79-9220b3a50af5" name="Changes" comment="refactor: rename signal and method for clarity">
+    <list default="true" id="00e9b275-2dd4-481f-ae79-9220b3a50af5" name="Changes" comment="feat(ui): add video/audio format combobox for available format selection">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/downloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/downloader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/download_mainwindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/download_mainwindow.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/download_mainwindow.ui" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/download_mainwindow.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/workers/format.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/workers/format.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,7 +209,8 @@
       <workItem from="1750320730905" duration="922000" />
       <workItem from="1750322331940" duration="4000" />
       <workItem from="1750322471736" duration="974000" />
-      <workItem from="1750324300489" duration="2947000" />
+      <workItem from="1750324300489" duration="3806000" />
+      <workItem from="1750329164676" duration="2869000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -324,7 +324,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750323107409</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="feat(ui): add video/audio format combobox for available format selection">
+      <option name="closed" value="true" />
+      <created>1750327465228</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1750327465228</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -354,13 +362,14 @@
     <MESSAGE value="refactor(ui): auto-clear cmd output before actions and remove manual clear button" />
     <MESSAGE value="refactor(FetchFormatWorker): remove unnecessary fields from format list display" />
     <MESSAGE value="refactor: rename signal and method for clarity" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: rename signal and method for clarity" />
+    <MESSAGE value="feat(ui): add video/audio format combobox for available format selection" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(ui): add video/audio format combobox for available format selection" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/downloader$dlp.coverage" NAME="dlp Coverage Results" MODIFIED="1750314344718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/downloader$downloader.coverage" NAME="downloader Coverage Results" MODIFIED="1750256465745" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/downloader$format.coverage" NAME="format Coverage Results" MODIFIED="1750318237593" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/workers" />
     <SUITE FILE_PATH="coverage/downloader$test.coverage" NAME="test Coverage Results" MODIFIED="1750317300115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/downloader$main.coverage" NAME="main Coverage Results" MODIFIED="1750326941711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/downloader$main.coverage" NAME="main Coverage Results" MODIFIED="1750332016124" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

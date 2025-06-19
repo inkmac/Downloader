@@ -7,6 +7,16 @@ from src.workers.download import DownloadWorker
 from src.workers.format import FetchFormatWorker
 
 
+STATIC_VIDEO_ITEMS = (
+    ("bestvideo（自动选择最好视频格式）", "bestvideo"),
+    ("None（不下载视频）", None),
+)
+
+STATIC_AUDIO_ITEMS = (
+    ("bestaudio（自动选择最好音频格式）", "bestaudio"),
+    ("None（不下载音频）", None),
+)
+
 class Downloader(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
@@ -21,10 +31,31 @@ class Downloader(QMainWindow, Ui_MainWindow):
         self.cmd_output_plaintextedit.setReadOnly(True)
         self.get_cookie_result_plaintextedit.setReadOnly(True)
 
+        # set combobox choices
+        self.init_video_combobox()
+        self.init_audio_combobox()
+
+    def init_video_combobox(self):
+        for item in STATIC_VIDEO_ITEMS:
+            self.video_format_id_combobox.addItem(*item)
+
+    def init_audio_combobox(self):
+        for item in STATIC_AUDIO_ITEMS:
+            self.audio_format_id_combobox.addItem(*item)
+
     def connect_signals(self):
+        self.video_url_lineedit.textChanged.connect(self.on_video_url_changed)
+
         self.get_cookies_button.clicked.connect(self.get_cookies)
         self.video_download_button.clicked.connect(self.download_video)
         self.video_format_fetch_button.clicked.connect(self.fetch_video_format)
+
+    # slot functions -------------------------------
+    def on_video_url_changed(self):
+        self.audio_format_id_combobox.clear()
+        self.video_format_id_combobox.clear()
+        self.init_video_combobox()
+        self.init_audio_combobox()
 
     # cookie get functions
     def get_cookies(self):
@@ -44,7 +75,16 @@ class Downloader(QMainWindow, Ui_MainWindow):
 
         # get params
         url = self.video_url_lineedit.text()
-        fmt = f'{self.video_format_id_combobox.currentText()}+{self.audio_format_id_combobox.currentText()}'
+
+        video_fmt = self.video_format_id_combobox.currentData()
+        audio_fmt = self.audio_format_id_combobox.currentData()
+
+        if video_fmt is None:
+            fmt = f'{audio_fmt}'
+        elif audio_fmt is None:
+            fmt = f'{video_fmt}'
+        else:
+            fmt = f'{video_fmt}+{audio_fmt}'
 
         if 'bilibili.com' in url:
             cookie = COOKIES_DIR / 'bilibili.com_cookies.txt'
@@ -93,12 +133,18 @@ class Downloader(QMainWindow, Ui_MainWindow):
         self.video_fetch_format_worker.start()
 
     def video_fetch_format_ready(self, video_format_ids: list[str]):
+        self.video_format_id_combobox.clear()
+        self.init_video_combobox()
+
         for video_format_id in video_format_ids:
-            self.video_format_id_combobox.addItem(video_format_id)
+            self.video_format_id_combobox.addItem(video_format_id, video_format_id)
 
     def audio_fetch_format_ready(self, audio_format_ids: list[str]):
+        self.audio_format_id_combobox.clear()
+        self.init_audio_combobox()
+
         for audio_format_id in audio_format_ids:
-            self.audio_format_id_combobox.addItem(audio_format_id)
+            self.audio_format_id_combobox.addItem(audio_format_id, audio_format_id)
 
 
     def append_console_output(self, message: str):
