@@ -34,14 +34,17 @@ class Downloader(QMainWindow, Ui_MainWindow):
         self.init_audio_combobox()
 
     def init_website_combobox(self):
+        self.website_combobox.clear()
         for domain, config in SITE_CONFIGS.items():
             self.website_combobox.addItem(config['label'], domain)
 
     def init_video_combobox(self):
+        self.video_format_id_combobox.clear()
         for item in STATIC_VIDEO_ITEMS:
             self.video_format_id_combobox.addItem(*item)
 
     def init_audio_combobox(self):
+        self.audio_format_id_combobox.clear()
         for item in STATIC_AUDIO_ITEMS:
             self.audio_format_id_combobox.addItem(*item)
 
@@ -53,12 +56,6 @@ class Downloader(QMainWindow, Ui_MainWindow):
         self.video_format_fetch_button.clicked.connect(self.fetch_video_format)
 
     # ------------------------------------- slot functions -------------------------------
-    def on_video_url_changed(self):
-        self.audio_format_id_combobox.clear()
-        self.video_format_id_combobox.clear()
-        self.init_video_combobox()
-        self.init_audio_combobox()
-
     # cookie get functions
     def get_cookies(self):
         browser = self.browser_combobox.currentText()
@@ -136,19 +133,20 @@ class Downloader(QMainWindow, Ui_MainWindow):
         self.video_fetch_format_worker.start()
 
     def video_fetch_format_ready(self, video_format_ids: list[tuple[str, str]]):
-        self.video_format_id_combobox.clear()
         self.init_video_combobox()
 
         for display_text, video_format_id in video_format_ids:
             self.video_format_id_combobox.addItem(display_text, userData=video_format_id)
 
     def audio_fetch_format_ready(self, audio_format_ids: list[tuple[str, str]]):
-        self.audio_format_id_combobox.clear()
         self.init_audio_combobox()
 
         for display_text, audio_format_id in audio_format_ids:
             self.audio_format_id_combobox.addItem(display_text, userData=audio_format_id)
 
+    def on_video_url_changed(self):
+        self.init_video_combobox()
+        self.init_audio_combobox()
 
     def append_console_output(self, message: str):
         self.cmd_output_plaintextedit.appendPlainText(message)
