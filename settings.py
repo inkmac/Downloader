@@ -8,7 +8,7 @@ else:
 
 COOKIES_DIR = BASE_DIR / 'cookies'
 VIDEOS_DIR = BASE_DIR / 'videos'
-
+DOWNLOAD_CONFIGS_PATH = BASE_DIR / 'config' / 'download_config.json'
 
 SITE_CONFIGS = {
     'bilibili.com': {

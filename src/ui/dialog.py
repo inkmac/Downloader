@@ -1,4 +1,6 @@
+import json
 from abc import ABC, abstractmethod
+from pathlib import Path
 from typing import Any
 
 from PySide6.QtWidgets import (
@@ -18,6 +20,10 @@ class SchemaField(ABC):
 
     @abstractmethod
     def get_value(self):
+        pass
+
+    @abstractmethod
+    def set_value(self, value):
         pass
 
 
@@ -74,6 +80,8 @@ class SettingsDialog(QDialog):
         self.setWindowTitle("设置")
         self.fields = fields
 
+        self.setMinimumWidth(250)
+
         layout = QVBoxLayout()
         form = QFormLayout()
 
@@ -95,3 +103,24 @@ class SettingsDialog(QDialog):
         for field in self.fields:
             result[field.key] = field.get_value()
         return result
+
+    def save_to_file(self, path: Path):
+        if not path.exists():
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.touch(exist_ok=True)
+
+        settings = self.get_settings()
+
+        with path.open('w', encoding='utf-8') as file:
+            json.dump(settings, file, ensure_ascii=False, indent=4)  # type: ignore[arg-type]
+
+    def load_from_file(self, path: Path):
+        if not path.exists():
+            return
+
+        with path.open('r', encoding='utf-8') as file:
+            settings = json.load(file)
+
+        for field in self.fields:
+            if field.key in settings:
+                field.set_value(settings[field.key])
