@@ -75,6 +75,10 @@ def initialize_config(expire_day: int = 30):
 
 
 def save_current_time(current_time: datetime) -> bool:
+    """
+    :return: True if the software is expired checked with `current_time` or system time error,
+        False if the software is not expired
+    """
     data = read_config()
 
     latest_used_time: datetime = parse_date_time(data['latest_used_time'])
