@@ -37,7 +37,6 @@ def read_config() -> ExpireConfig | None:
             return None
 
         decrypted = fernet.decrypt(str(encrypted).encode())
-        print(json.loads(decrypted.decode()))
         return json.loads(decrypted.decode())
     except Exception:
         sys.exit(1)

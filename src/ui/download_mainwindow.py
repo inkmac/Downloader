@@ -71,7 +71,7 @@ class Ui_MainWindow(object):
         self.cmd_output_plaintextedit.setReadOnly(True)
         self.video_format_fetch_button = QPushButton(self.centralwidget)
         self.video_format_fetch_button.setObjectName(u"video_format_fetch_button")
-        self.video_format_fetch_button.setGeometry(QRect(320, 430, 211, 23))
+        self.video_format_fetch_button.setGeometry(QRect(320, 430, 241, 23))
         self.label_6 = QLabel(self.centralwidget)
         self.label_6.setObjectName(u"label_6")
         self.label_6.setGeometry(QRect(150, 390, 61, 21))
@@ -107,7 +107,7 @@ class Ui_MainWindow(object):
         self.video_download_button.setText(QCoreApplication.translate("MainWindow", u"\u70b9\u51fb\u4e0b\u8f7d", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u89c6\u9891\u683c\u5f0f\uff1a", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u89c6\u9891url\uff1a", None))
-        self.video_format_fetch_button.setText(QCoreApplication.translate("MainWindow", u"\u70b9\u51fb\u83b7\u53d6\u89c6\u9891\u53ef\u7528\u683c\u5f0f", None))
+        self.video_format_fetch_button.setText(QCoreApplication.translate("MainWindow", u"\u70b9\u51fb\u83b7\u53d6\u66f4\u591a\u89c6\u9891\u53ef\u7528\u683c\u5f0f", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"\u89c6\u9891\uff1a", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"\u97f3\u9891\uff1a", None))
     # retranslateUi
