@@ -34,8 +34,8 @@ class Downloader(QMainWindow, Ui_MainWindow):
         self.init_audio_combobox()
 
     def init_website_combobox(self):
-        for domain in SITE_CONFIGS.keys():
-            self.website_combobox.addItem(domain)
+        for domain, config in SITE_CONFIGS.items():
+            self.website_combobox.addItem(config['label'], domain)
 
     def init_video_combobox(self):
         for item in STATIC_VIDEO_ITEMS:
@@ -62,7 +62,7 @@ class Downloader(QMainWindow, Ui_MainWindow):
     # cookie get functions
     def get_cookies(self):
         browser = self.browser_combobox.currentText()
-        website = self.website_combobox.currentText()
+        website = self.website_combobox.currentData()
 
         self.cookie_worker = CookieWorker(website, browser)
         self.cookie_worker.result_ready.connect(self.on_cookie_get_done)

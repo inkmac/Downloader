@@ -12,10 +12,12 @@ VIDEOS_DIR = BASE_DIR / 'videos'
 
 SITE_CONFIGS = {
     'bilibili.com': {
+        'label': 'bilibili',
         'cookie': COOKIES_DIR / 'bilibili.com_cookies.txt',
         'output': VIDEOS_DIR / 'bilibili' / '%(title)s.%(ext)s',
     },
     'youtube.com': {
+        'label': 'YouTube',
         'cookie': COOKIES_DIR / 'youtube.com_cookies.txt',
         'output': VIDEOS_DIR / 'youtube' / '%(title)s.%(ext)s',
     }

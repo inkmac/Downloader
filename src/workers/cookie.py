@@ -30,7 +30,7 @@ class CookieWorker(QThread):
                 case "Firefox":
                     cj = browser_cookie3.firefox(domain_name=self.website)
                 case _:
-                    raise ValueError(f"Unsupported browser: {self.website}")
+                    raise ValueError(f"Unsupported browser: {self.browser}")
 
             mcj = MozillaCookieJar(cookie_path)
 
