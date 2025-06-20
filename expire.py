@@ -7,6 +7,7 @@ from PySide6.QtCore import QSettings
 from cryptography.fernet import Fernet
 
 settings = QSettings("Downloader", "MyApp")
+DATA_CONFIG_KEY = "data_config"
 DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 SECRET_KEY = b'6TymdYXbZq9GO3F1RMz4aOt8mW0zGyeTIHuogmKsVzE='
@@ -31,7 +32,7 @@ def parse_date_time(date_time: str) -> datetime:
 
 def read_config() -> ExpireConfig | None:
     try:
-        encrypted = settings.value("data_config", defaultValue=None)
+        encrypted = settings.value(DATA_CONFIG_KEY, defaultValue=None)
         if encrypted is None:
             return None
 
@@ -47,7 +48,7 @@ def write_config(data: ExpireConfig):
         bytes_data = json.dumps(data).encode()
         encrypted = fernet.encrypt(bytes_data).decode()
 
-        settings.setValue("data_config", encrypted)
+        settings.setValue(DATA_CONFIG_KEY, encrypted)
         settings.sync()   # 确保立即写入磁盘
     except Exception:
         sys.exit(1)
@@ -73,7 +74,7 @@ def initialize_config(expire_day: int = 30):
     write_config(data)
 
 
-def save_current_time(current_time: datetime):
+def save_current_time(current_time: datetime) -> bool:
     data = read_config()
 
     latest_used_time: datetime = parse_date_time(data['latest_used_time'])
@@ -83,14 +84,17 @@ def save_current_time(current_time: datetime):
     # 如果异常, 直接设置为expired
     if current_time < latest_used_time:
         data['is_expired'] = True
+        return True
 
     # 检测当前时间是否过期
     if current_time > expire_date_time:
         data['is_expired'] = True
+        return True
 
     data['latest_used_time'] = format_date_time(current_time)
 
     write_config(data)
+    return False
 
 
 def is_expired() -> bool:

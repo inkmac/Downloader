@@ -13,7 +13,8 @@ def main():
     if expire.is_expired():
         sys.exit(1)
 
-    expire.save_current_time(datetime.now())
+    if expire.save_current_time(datetime.now()):
+        sys.exit(1)
 
     app = QApplication([])
     window = Downloader()
