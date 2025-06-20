@@ -1,6 +1,6 @@
-from PySide6.QtWidgets import QMainWindow, QComboBox
+from PySide6.QtWidgets import QMainWindow
 
-from settings import COOKIES_DIR, SITE_CONFIGS
+from settings import SITE_CONFIGS
 from src.ui.download_mainwindow import Ui_MainWindow
 from src.utils.site import get_site_config
 from src.workers.cookie import CookieWorker
