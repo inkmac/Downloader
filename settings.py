@@ -8,3 +8,15 @@ else:
 
 COOKIES_DIR = BASE_DIR / 'cookies'
 VIDEOS_DIR = BASE_DIR / 'videos'
+
+
+SITE_CONFIGS = {
+    'bilibili.com': {
+        'cookie': COOKIES_DIR / 'bilibili.com_cookies.txt',
+        'output': VIDEOS_DIR / 'bilibili' / '%(title)s.%(ext)s',
+    },
+    'youtube.com': {
+        'cookie': COOKIES_DIR / 'youtube.com_cookies.txt',
+        'output': VIDEOS_DIR / 'youtube' / '%(title)s.%(ext)s',
+    }
+}

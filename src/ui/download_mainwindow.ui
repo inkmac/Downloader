@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>968</width>
+    <width>962</width>
     <height>799</height>
    </rect>
   </property>
@@ -91,16 +91,6 @@
       <height>31</height>
      </rect>
     </property>
-    <item>
-     <property name="text">
-      <string>bilibili.com</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>youtube.com</string>
-     </property>
-    </item>
    </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
@@ -124,6 +114,9 @@
       <height>64</height>
      </rect>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QPushButton" name="video_download_button">
     <property name="geometry">
@@ -143,7 +136,7 @@
      <rect>
       <x>130</x>
       <y>360</y>
-      <width>771</width>
+      <width>761</width>
       <height>21</height>
      </rect>
     </property>
@@ -179,9 +172,12 @@
      <rect>
       <x>70</x>
       <y>460</y>
-      <width>831</width>
+      <width>821</width>
       <height>261</height>
      </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="video_format_fetch_button">

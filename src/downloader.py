@@ -1,11 +1,11 @@
-from PySide6.QtWidgets import QMainWindow
+from PySide6.QtWidgets import QMainWindow, QComboBox
 
-from settings import COOKIES_DIR, VIDEOS_DIR
+from settings import COOKIES_DIR, SITE_CONFIGS
 from src.ui.download_mainwindow import Ui_MainWindow
+from src.utils.site import get_site_config
 from src.workers.cookie import CookieWorker
 from src.workers.download import DownloadWorker
 from src.workers.format import FetchFormatWorker
-
 
 STATIC_VIDEO_ITEMS = (
     ("bestvideo（自动选择最好视频格式）", "bestvideo"),
@@ -28,12 +28,14 @@ class Downloader(QMainWindow, Ui_MainWindow):
 
 
     def init_state(self):
-        self.cmd_output_plaintextedit.setReadOnly(True)
-        self.get_cookie_result_plaintextedit.setReadOnly(True)
-
         # set combobox choices
+        self.init_website_combobox()
         self.init_video_combobox()
         self.init_audio_combobox()
+
+    def init_website_combobox(self):
+        for domain in SITE_CONFIGS.keys():
+            self.website_combobox.addItem(domain)
 
     def init_video_combobox(self):
         for item in STATIC_VIDEO_ITEMS:
@@ -50,7 +52,7 @@ class Downloader(QMainWindow, Ui_MainWindow):
         self.video_download_button.clicked.connect(self.download_video)
         self.video_format_fetch_button.clicked.connect(self.fetch_video_format)
 
-    # slot functions -------------------------------
+    # ------------------------------------- slot functions -------------------------------
     def on_video_url_changed(self):
         self.audio_format_id_combobox.clear()
         self.video_format_id_combobox.clear()
@@ -79,6 +81,9 @@ class Downloader(QMainWindow, Ui_MainWindow):
         video_fmt = self.video_format_id_combobox.currentData()
         audio_fmt = self.audio_format_id_combobox.currentData()
 
+        if video_fmt is None and audio_fmt is None:
+            self.cmd_output_plaintextedit.appendPlainText('未选择下载内容')
+            return
         if video_fmt is None:
             fmt = f'{audio_fmt}'
         elif audio_fmt is None:
@@ -86,15 +91,14 @@ class Downloader(QMainWindow, Ui_MainWindow):
         else:
             fmt = f'{video_fmt}+{audio_fmt}'
 
-        if 'bilibili.com' in url:
-            cookie = COOKIES_DIR / 'bilibili.com_cookies.txt'
-            output = VIDEOS_DIR / 'bilibili' / '%(title)s.%(ext)s'
-        elif 'youtube.com' in url:
-            cookie = COOKIES_DIR / 'youtube.com_cookies.txt'
-            output = VIDEOS_DIR / 'youtube' / '%(title)s.%(ext)s'
-        else:
+        config = get_site_config(url)
+
+        if config is None:
             self.cmd_output_plaintextedit.appendPlainText('当前网址不支持！')
             return
+
+        cookie = config['cookie']
+        output = config['output']
 
         if not cookie.exists():
             self.cmd_output_plaintextedit.appendPlainText('该网址cookie不存在！请先获取cookies！')
@@ -118,13 +122,12 @@ class Downloader(QMainWindow, Ui_MainWindow):
 
         url = self.video_url_lineedit.text()
 
-        if 'bilibili.com' in url:
-            cookie = COOKIES_DIR / 'bilibili.com_cookies.txt'
-        elif 'youtube.com' in url:
-            cookie = COOKIES_DIR / 'youtube.com_cookies.txt'
-        else:
+        config = get_site_config(url)
+        if config is None:
             self.cmd_output_plaintextedit.appendPlainText('当前网址不支持！')
             return
+
+        cookie = config['cookie']
 
         self.video_fetch_format_worker = FetchFormatWorker(url, cookie)
         self.video_fetch_format_worker.console_output.connect(self.append_console_output)

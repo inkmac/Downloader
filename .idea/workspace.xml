@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00e9b275-2dd4-481f-ae79-9220b3a50af5" name="Changes" comment="feat: add SignalYoutubeDL for console output signaling, enhance video/audio format selection feedback">
+    <list default="true" id="00e9b275-2dd4-481f-ae79-9220b3a50af5" name="Changes" comment="refactor: optimize">
+      <change afterPath="$PROJECT_DIR$/src/utils/site.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/workers/download.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/workers/download.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/workers/format.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/workers/format.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/downloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/downloader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/download_mainwindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/download_mainwindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/download_mainwindow.ui" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/download_mainwindow.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +214,15 @@
       <workItem from="1750324300489" duration="3806000" />
       <workItem from="1750329164676" duration="3006000" />
       <workItem from="1750332297668" duration="6715000" />
-      <workItem from="1750339647755" duration="1398000" />
+      <workItem from="1750339647755" duration="1470000" />
+      <workItem from="1750341169241" duration="38000" />
+      <workItem from="1750341217366" duration="30000" />
+      <workItem from="1750342359154" duration="194000" />
+      <workItem from="1750344066194" duration="239000" />
+      <workItem from="1750378143525" duration="987000" />
+      <workItem from="1750381500296" duration="3000" />
+      <workItem from="1750383580477" duration="1178000" />
+      <workItem from="1750385156106" duration="5277000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -357,7 +368,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750339628653</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="refactor: optimize">
+      <option name="closed" value="true" />
+      <created>1750341111261</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1750341111261</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,7 +401,6 @@
     <MESSAGE value="feat(downloader): add yt-dlp path" />
     <MESSAGE value="feat: add cmd output clear button" />
     <MESSAGE value="feat(format): add FetchFormatWorker to fetch video available formats" />
-    <MESSAGE value="refactor: optimize" />
     <MESSAGE value="refactor(yt-dlp): replace subprocess with yt-dlp Python API" />
     <MESSAGE value="refactor(ui): auto-clear cmd output before actions and remove manual clear button" />
     <MESSAGE value="refactor(FetchFormatWorker): remove unnecessary fields from format list display" />
@@ -391,13 +409,14 @@
     <MESSAGE value="fix(ui): prevent format combobox duplication and enable currentData usage" />
     <MESSAGE value="refactor(FetchFormatWorker): optimize" />
     <MESSAGE value="feat: add SignalYoutubeDL for console output signaling, enhance video/audio format selection feedback" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add SignalYoutubeDL for console output signaling, enhance video/audio format selection feedback" />
+    <MESSAGE value="refactor: optimize" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: optimize" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/downloader$dlp.coverage" NAME="dlp Coverage Results" MODIFIED="1750314344718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/downloader$downloader.coverage" NAME="downloader Coverage Results" MODIFIED="1750256465745" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/downloader$format.coverage" NAME="format Coverage Results" MODIFIED="1750318237593" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/workers" />
     <SUITE FILE_PATH="coverage/downloader$test.coverage" NAME="test Coverage Results" MODIFIED="1750317300115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
-    <SUITE FILE_PATH="coverage/downloader$main.coverage" NAME="main Coverage Results" MODIFIED="1750340988235" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/downloader$main.coverage" NAME="main Coverage Results" MODIFIED="1750390592809" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
