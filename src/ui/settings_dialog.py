@@ -1,36 +1,37 @@
 import json
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Any
+from typing import Any, TypeVar, Generic
 
 from PySide6.QtWidgets import (
     QDialog, QVBoxLayout, QFormLayout, QDialogButtonBox,
     QSpinBox, QCheckBox, QWidget
 )
 
+T = TypeVar('T')
 
-class SchemaField(ABC):
-    def __init__(self, key: str, label: str):
+class SchemaField(ABC, Generic[T]):
+    def __init__(self, key: str, label: str, default: T):
         self.key = key
         self.label = label
+        self.default = default
 
     @abstractmethod
     def create_widget(self) -> QWidget:
         pass
 
     @abstractmethod
-    def get_value(self):
+    def get_value(self) -> T:
         pass
 
     @abstractmethod
-    def set_value(self, value):
+    def set_value(self, value: T):
         pass
 
 
-class BoolField(SchemaField):
+class BoolField(SchemaField[bool]):
     def __init__(self, key: str, label: str, default: bool = False):
-        super().__init__(key, label)
-        self.default = default
+        super().__init__(key, label, default)
         self.widget: QCheckBox | None = None
 
     def create_widget(self) -> QCheckBox:
@@ -38,7 +39,7 @@ class BoolField(SchemaField):
         self.widget.setChecked(self.default)
         return self.widget
 
-    def get_value(self):
+    def get_value(self) -> bool:
         if self.widget is None:
             raise RuntimeError("Widget not created yet")
         return self.widget.isChecked()
@@ -49,10 +50,9 @@ class BoolField(SchemaField):
         self.widget.setChecked(value)
 
 
-class IntField(SchemaField):
+class IntField(SchemaField[int]):
     def __init__(self, key: str, label: str, default: int = 0, min_val: int = -1000000, max_val: int = 1000000):
-        super().__init__(key, label)
-        self.default = default
+        super().__init__(key, label, default)
         self.min = min_val
         self.max = max_val
         self.widget: QSpinBox | None = None
@@ -63,7 +63,7 @@ class IntField(SchemaField):
         self.widget.setValue(self.default)
         return self.widget
 
-    def get_value(self):
+    def get_value(self) -> int:
         if self.widget is None:
             raise RuntimeError("Widget not created yet")
         return self.widget.value()
