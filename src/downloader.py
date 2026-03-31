@@ -94,22 +94,11 @@ class Downloader(QMainWindow, Ui_MainWindow):
             self.cmd_output_plaintextedit.appendPlainText('当前网址不支持！')
             return
 
-        cookie = config['cookie']
-        output = config['output']
-
-        if not cookie.exists():
-            self.cmd_output_plaintextedit.appendPlainText('该网址cookie不存在！请先获取cookies！')
-            return
-
-        output.parent.mkdir(parents=True, exist_ok=True)
+        cookiefile = config['cookiefile']
+        outtmpl = config['outtmpl']
 
         # start worker
-        self.download_worker = DownloadWorker(
-            url=url,
-            cookie=cookie,
-            fmt=fmt,
-            output=output,
-        )
+        self.download_worker = DownloadWorker(url=url, fmt=fmt, outtmpl=outtmpl, cookiefile=cookiefile)
         self.download_worker.console_output.connect(self.append_console_output)
         self.download_worker.start()
 
@@ -124,9 +113,9 @@ class Downloader(QMainWindow, Ui_MainWindow):
             self.cmd_output_plaintextedit.appendPlainText('当前网址不支持！')
             return
 
-        cookie = config['cookie']
+        cookiefile = config['cookiefile']
 
-        self.video_fetch_format_worker = FetchFormatWorker(url, cookie)
+        self.video_fetch_format_worker = FetchFormatWorker(url, cookiefile)
         self.video_fetch_format_worker.console_output.connect(self.append_console_output)
         self.video_fetch_format_worker.video_formats_ready.connect(self.video_fetch_format_ready)
         self.video_fetch_format_worker.audio_formats_ready.connect(self.audio_fetch_format_ready)

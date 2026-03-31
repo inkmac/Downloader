@@ -13,12 +13,12 @@ DOWNLOAD_CONFIGS_PATH = BASE_DIR / 'data' / 'config' / 'download_config.json'
 SITE_CONFIGS = {
     'bilibili.com': {
         'label': 'bilibili',
-        'cookie': COOKIES_DIR / 'bilibili.com_cookies.txt',
-        'output': VIDEOS_DIR / 'bilibili' / '%(title)s.%(ext)s',
+        'cookiefile': COOKIES_DIR / 'bilibili.com_cookies.txt',
+        'outtmpl': VIDEOS_DIR / 'bilibili' / '%(title)s.%(ext)s',
     },
     'youtube.com': {
         'label': 'YouTube',
-        'cookie': COOKIES_DIR / 'youtube.com_cookies.txt',
-        'output': VIDEOS_DIR / 'youtube' / '%(title)s.%(ext)s',
+        'cookiefile': COOKIES_DIR / 'youtube.com_cookies.txt',
+        'outtmpl': VIDEOS_DIR / 'youtube' / '%(title)s.%(ext)s',
     }
 }

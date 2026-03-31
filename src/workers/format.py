@@ -1,4 +1,5 @@
 import traceback
+from pathlib import Path
 
 from PySide6.QtCore import QThread, Signal
 
@@ -14,11 +15,11 @@ class FetchFormatWorker(QThread):
     def __init__(
             self,
             url: str,
-            cookie: str
+            cookiefile: Path = None,
     ):
         super().__init__()
         self.url = url
-        self.cookie = cookie
+        self.cookiefile = cookiefile
 
 
     def run(self):
@@ -31,7 +32,7 @@ class FetchFormatWorker(QThread):
 
     def fetch_format(self):
         ydl_opts = {
-            'cookiefile': self.cookie,
+            'cookiefile': str(self.cookiefile),
             'logger': YtLogger(self.console_output),
         }
 
