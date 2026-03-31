@@ -14,5 +14,4 @@ venv/
 *.mkv
 *.webm
 
-cookies/
-videos/
+data/

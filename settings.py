@@ -6,9 +6,9 @@ if getattr(sys, 'frozen', False):
 else:
     BASE_DIR = Path(__file__).resolve().parent
 
-COOKIES_DIR = BASE_DIR / 'cookies'
-VIDEOS_DIR = BASE_DIR / 'videos'
-DOWNLOAD_CONFIGS_PATH = BASE_DIR / 'config' / 'download_config.json'
+COOKIES_DIR = BASE_DIR / 'data' / 'cookies'
+VIDEOS_DIR = BASE_DIR / 'data' / 'videos'
+DOWNLOAD_CONFIGS_PATH = BASE_DIR / 'data' / 'config' / 'download_config.json'
 
 SITE_CONFIGS = {
     'bilibili.com': {
