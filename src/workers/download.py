@@ -4,6 +4,7 @@ from pathlib import Path
 from PySide6.QtCore import QThread, Signal
 from yt_dlp import YoutubeDL
 
+from src.utils.cookiefile import check_cookie_file_valid
 from src.utils.logger import YtLogger
 
 
@@ -15,7 +16,7 @@ class DownloadWorker(QThread):
             url: str,
             fmt: str,
             outtmpl: Path,
-            cookiefile: Path = None,
+            cookiefile: Path,
     ):
         super().__init__()
         self.url = url
@@ -34,12 +35,22 @@ class DownloadWorker(QThread):
     def download(self):
         self.outtmpl.parent.mkdir(parents=True, exist_ok=True)
 
-        ydl_opts = {
-            'format': self.fmt,
-            'cookiefile': str(self.cookiefile),
-            'outtmpl': str(self.outtmpl),
-            'logger': YtLogger(self.console_output),
-        }
+        is_valid, msg = check_cookie_file_valid(self.cookiefile)
+        self.console_output.emit(msg)
+
+        if is_valid:
+            ydl_opts = {
+                'format': self.fmt,
+                'cookiefile': str(self.cookiefile),
+                'outtmpl': str(self.outtmpl),
+                'logger': YtLogger(self.console_output),
+            }
+        else:
+            ydl_opts = {
+                'format': self.fmt,
+                'outtmpl': str(self.outtmpl),
+                'logger': YtLogger(self.console_output),
+            }
 
         with YoutubeDL(ydl_opts) as ydl:
             ydl.download([self.url])

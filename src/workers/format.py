@@ -3,6 +3,7 @@ from pathlib import Path
 
 from PySide6.QtCore import QThread, Signal
 
+from src.utils.cookiefile import check_cookie_file_valid
 from src.utils.custom_yt import SignalYoutubeDL
 from src.utils.logger import YtLogger
 
@@ -15,7 +16,7 @@ class FetchFormatWorker(QThread):
     def __init__(
             self,
             url: str,
-            cookiefile: Path = None,
+            cookiefile: Path,
     ):
         super().__init__()
         self.url = url
@@ -31,10 +32,19 @@ class FetchFormatWorker(QThread):
 
 
     def fetch_format(self):
-        ydl_opts = {
-            'cookiefile': str(self.cookiefile),
-            'logger': YtLogger(self.console_output),
-        }
+        is_valid, msg = check_cookie_file_valid(self.cookiefile)
+        self.console_output.emit(msg)
+
+        if is_valid:
+            ydl_opts = {
+                'cookiefile': str(self.cookiefile),
+                'logger': YtLogger(self.console_output),
+            }
+        else:
+            ydl_opts = {
+                'logger': YtLogger(self.console_output),
+            }
+
 
         with SignalYoutubeDL(ydl_opts, console_signal=self.console_output) as ydl:
             info = ydl.extract_info(self.url, download=False)
