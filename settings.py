@@ -10,6 +10,12 @@ COOKIES_DIR = BASE_DIR / 'data' / 'cookies'
 VIDEOS_DIR = BASE_DIR / 'data' / 'videos'
 DOWNLOAD_CONFIGS_PATH = BASE_DIR / 'data' / 'config' / 'download_config.json'
 
+if getattr(sys, 'frozen', False):
+    # noinspection PyUnresolvedReferences, PyProtectedMember
+    FFMPEG_DIR = Path(sys._MEIPASS) / 'assets' / 'ffmpeg'
+else:
+    FFMPEG_DIR = BASE_DIR / 'assets' / 'ffmpeg'
+
 SITE_CONFIGS = {
     'bilibili.com': {
         'label': 'bilibili',

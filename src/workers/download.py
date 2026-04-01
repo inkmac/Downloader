@@ -4,6 +4,7 @@ from pathlib import Path
 from PySide6.QtCore import QThread, Signal
 from yt_dlp import YoutubeDL
 
+from settings import FFMPEG_DIR
 from src.utils.cookiefile import check_cookie_file_valid
 from src.utils.logger import YtLogger
 
@@ -44,12 +45,14 @@ class DownloadWorker(QThread):
                 'cookiefile': str(self.cookiefile),
                 'outtmpl': str(self.outtmpl),
                 'logger': YtLogger(self.console_output),
+                "ffmpeg_location": str(FFMPEG_DIR),
             }
         else:
             ydl_opts = {
                 'format': self.fmt,
                 'outtmpl': str(self.outtmpl),
                 'logger': YtLogger(self.console_output),
+                "ffmpeg_location": str(FFMPEG_DIR),
             }
 
         with YoutubeDL(ydl_opts) as ydl:
